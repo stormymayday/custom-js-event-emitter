@@ -4,10 +4,10 @@ export class EventEmitter {
     }
 
     on(eventName, fn) {
-        if (this.events[eventName]) {
-            this.events[eventName].push(fn);
-        } else {
+        if (!this.events[eventName]) {
             this.events[eventName] = [fn];
+        } else {
+            this.events[eventName].push(fn);
         }
     }
 
@@ -18,10 +18,18 @@ export class EventEmitter {
         });
     }
 
-    off(eventName, listener) {
+    off(eventName, fn) {
         if (!this.events[eventName]) return;
-        this.events[eventName] = this.events[eventName].filter((fn) => {
-            return fn !== listener;
+        this.events[eventName] = this.events[eventName].filter((el) => {
+            return el !== fn;
         });
+    }
+
+    once(eventName, fn) {
+        const onceWrapper = (...args) => {
+            fn(...args);
+            this.off(eventName, onceWrapper);
+        };
+        this.on(eventName, onceWrapper);
     }
 }

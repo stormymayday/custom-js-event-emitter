@@ -1,24 +1,16 @@
 import { EventEmitter } from "./variants/object-array.js";
+import { EventEmitter as EventEmitterV2 } from "./variants/map-set.js";
 
-const myEmitter = new EventEmitter();
+const emitter = new EventEmitter();
 
-function listener1() {
-    return "Listener 1";
+function greet1() {
+    return `Hello`;
 }
-function listener2(param) {
-    return `Listener 2: ${param} `;
+
+function greet2(name) {
+    return `Hello ${name}`;
 }
-function listener3(param1, param2) {
-    return `Listener 3: ${param1}, ${param2} `;
-}
-myEmitter.on("push", listener1);
-myEmitter.on("push", listener2);
-myEmitter.on("push", listener3);
 
-console.log(myEmitter);
-
-myEmitter.off("push", listener2);
-
-console.log(myEmitter);
-
-console.log(myEmitter.emit("push", "argument 1", "argument 2"));
+emitter.on("greeting", greet1);
+emitter.on("greeting", greet2);
+console.log(emitter.emit("greeting", "Joe"));

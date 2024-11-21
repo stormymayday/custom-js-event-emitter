@@ -21,4 +21,12 @@ export class EventEmitter {
         if (!this.events.has(eventName)) return;
         this.events.get(eventName).delete(listener);
     }
+
+    once(eventName, listener) {
+        const onceWrapper = (...args) => {
+            listener(...args);
+            this.off(eventName, onceWrapper);
+        };
+        this.on(eventName, onceWrapper);
+    }
 }

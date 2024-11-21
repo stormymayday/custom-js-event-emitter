@@ -11,9 +11,7 @@ function greet2(name) {
     return `Hello ${name}`;
 }
 
-emitter.on("greeting", greet1);
-emitter.on("greeting", greet2);
-// console.log(emitter.emit("greeting", "Joe"));
-console.log(emitter);
-emitter.off("greeting", greet1);
+emitter.once("greeting", greet1);
+// emitter.on("greeting", greet2);
+console.log(emitter.emit("greeting", "Joe"));
 console.log(emitter);

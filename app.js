@@ -2,18 +2,16 @@ import { EventEmitter } from "./variants/object-array.js";
 
 const myEmitter = new EventEmitter();
 
-myEmitter.on("click", () => {
-    console.log(`Click event occurred`);
-});
-
 myEmitter.on("push", () => {
-    console.log(`Push event occurred`);
+    return "First listener";
 });
 
 myEmitter.on("push", (argument1) => {
-    console.log(`Push event with argument:${argument1} occurred`);
+    return `Second listener with ${argument1}`;
 });
 
-// console.log(myEmitter);
-console.log(myEmitter.emit("push", "argument1"));
-// console.log(myEmitter.emit("click", "argument1"));
+myEmitter.on("push", (argument1, argument2) => {
+    return `Third listener with ${argument1} and ${argument2}`;
+});
+
+console.log(myEmitter.emit("push", "argument 1", "argument 2"));

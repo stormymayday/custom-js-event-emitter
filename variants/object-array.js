@@ -12,9 +12,9 @@ export class EventEmitter {
     }
 
     emit(eventName, ...args) {
-        if (!this.events[eventName]) return;
-        this.events[eventName].forEach((fn) => {
-            fn(...args);
+        if (!this.events[eventName]) return [];
+        return this.events[eventName].map((fn) => {
+            return fn(...args);
         });
     }
 }

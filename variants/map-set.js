@@ -16,4 +16,9 @@ export class EventEmitter {
             return listener(...args);
         });
     }
+
+    off(eventName, listener) {
+        if (!this.events.has(eventName)) return;
+        this.events.get(eventName).delete(listener);
+    }
 }

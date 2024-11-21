@@ -9,4 +9,11 @@ export class EventEmitter {
         }
         this.events.get(eventName).add(listener);
     }
+
+    emit(eventName, ...args) {
+        if (!this.events.has(eventName)) return [];
+        return [...this.events.get(eventName)].map((listener) => {
+            return listener(...args);
+        });
+    }
 }

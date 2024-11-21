@@ -13,5 +13,5 @@ function greet2(name) {
 
 emitter.on("greeting", greet1);
 emitter.on("greeting", greet2);
-// console.log(emitter.emit("greeting", "Joe"));
-console.log(emitter);
+console.log(emitter.emit("greeting", "Joe"));
+// console.log(emitter);

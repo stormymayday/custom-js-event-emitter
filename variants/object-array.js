@@ -10,4 +10,11 @@ export class EventEmitter {
             this.events[eventName] = [fn];
         }
     }
+
+    emit(eventName, ...args) {
+        if (!this.events[eventName]) return;
+        this.events[eventName].forEach((fn) => {
+            fn(...args);
+        });
+    }
 }
